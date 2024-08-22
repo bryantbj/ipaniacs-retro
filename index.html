@@ -57,11 +57,14 @@
 
         list.forEach(li => {
           liDate = new Date(li.dataset.date);
-          if (liDate < now) {
-            li.classList.add('date-past');
+          if (liDate.toDateString() === now.toDateString() && !foundNext) {
+            li.classList.add('date-next');
+            foundNext = true;
           } else if (liDate > now && !foundNext) {
             li.classList.add('date-next');
             foundNext = true;
+          } else if (liDate.toJSON() < now.toJSON()) {
+            li.classList.add('date-past');
           }
         })
       }
